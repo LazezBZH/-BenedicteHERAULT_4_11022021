@@ -61,10 +61,19 @@ function validerNom(e) {
 //validation du mail
 validation.addEventListener("click", validerMail);
 
+let mailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/; //regular expression mail source https://www.w3resource.com/
+
 function validerMail(e) {
   if (mail.validity.valueMissing) {
     e.preventDefault();
-    erreurMail.textContent = "* Une adresse mail valide est requise.";
+    erreurMail.textContent = "* Veuillez renseigner votre adresse mail.";
+    erreurMail.style.color = "red";
+    erreurMail.style.fontSize = ".85rem";
+    mail.style.border = " 0.8px solid red";
+  } else if (!mail.value.match(mailRegex)) {
+    e.preventDefault();
+    erreurMail.textContent =
+      "* Le format de votre adresse mail ne semble pas valide.";
     erreurMail.style.color = "red";
     erreurMail.style.fontSize = ".85rem";
     mail.style.border = " 0.8px solid red";
