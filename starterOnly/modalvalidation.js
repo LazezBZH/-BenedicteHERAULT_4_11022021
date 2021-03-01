@@ -11,8 +11,10 @@ let birthdate = document.getElementById("birthdate");
 let erreurBirthdate = document.getElementById("erreur-birthdate");
 let quantity = document.getElementById("quantity");
 let erreurQuantity = document.getElementById("erreur-quantity");
-let ville = document.getElementsByClassName("checkbox-input");
+let ville = document.getElementsByName("location");
 let erreurVille = document.getElementById("erreur-ville");
+let conditions = document.getElementById("checkbox1");
+let erreurConditions = document.getElementById("erreur-conditions");
 
 //validation du prénom
 validation.addEventListener("click", validerPrenom);
@@ -120,17 +122,35 @@ function validerQuantity(e) {
 
 //validation choix de ville d'inscription
 
-validation.addEventListener("click", validerRadio);
+/*validation.addEventListener("click", validerRadio);
 
 function validerRadio(e) {
-  if (!ville.IsRadioCheck) {
+  if (ville.IsRadioCheck) {
+    erreurVille.textContent = " ";
+    quantity.style.border = " 0.8px solid white";
+  } else {
     erreurVille.textContent =
       "* Dans quelle ville souhaitez-vous vous inscrire?";
     erreurVille.style.color = "red";
     erreurVille.style.fontSize = ".85rem";
     quantity.style.border = " 0.8px solid red";
-  } else {
-    erreurVille.textContent = " ";
+  }
+}*/
+
+//validation CGV
+
+validation.addEventListener("click", validerConditions);
+
+function validerConditions(e) {
+  if (conditions.checked) {
+    erreurConditions.textContent = " ";
     quantity.style.border = " 0.8px solid white";
+  } else {
+    e.preventDefault();
+    erreurConditions.textContent =
+      "* Vous devez lire et accepter les conditions d'utilisation.";
+    erreurConditions.style.color = "red";
+    erreurConditions.style.fontSize = ".85rem";
+    conditions.style.border = " 0.8px solid red";
   }
 }
