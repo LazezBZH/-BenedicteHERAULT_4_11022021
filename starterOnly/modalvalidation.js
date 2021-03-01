@@ -11,6 +11,8 @@ let birthdate = document.getElementById("birthdate");
 let erreurBirthdate = document.getElementById("erreur-birthdate");
 let quantity = document.getElementById("quantity");
 let erreurQuantity = document.getElementById("erreur-quantity");
+let ville = document.getElementsByClassName("checkbox-input");
+let erreurVille = document.getElementById("erreur-ville");
 
 //validation du prénom
 validation.addEventListener("click", validerPrenom);
@@ -112,6 +114,23 @@ function validerQuantity(e) {
     quantity.style.border = " 0.8px solid red";
   } else {
     erreurQuantity.textContent = " ";
+    quantity.style.border = " 0.8px solid white";
+  }
+}
+
+//validation choix de ville d'inscription
+
+validation.addEventListener("click", validerRadio);
+
+function validerRadio(e) {
+  if (!ville.IsRadioCheck) {
+    erreurVille.textContent =
+      "* Dans quelle ville souhaitez-vous vous inscrire?";
+    erreurVille.style.color = "red";
+    erreurVille.style.fontSize = ".85rem";
+    quantity.style.border = " 0.8px solid red";
+  } else {
+    erreurVille.textContent = " ";
     quantity.style.border = " 0.8px solid white";
   }
 }
