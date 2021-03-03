@@ -1,4 +1,4 @@
-//VALIDATION DU FORMULAIRE
+//VALIDATION DES ENTRÉES
 // variables
 let validation = document.getElementById("btn-envoi");
 let prenom = document.getElementById("first");
@@ -17,7 +17,7 @@ let conditions = document.getElementById("checkbox1");
 let erreurConditions = document.getElementById("erreur-conditions");
 
 //validation du prénom
-validation.addEventListener("click", validerPrenom);
+prenom.addEventListener("keyup", validerPrenom);
 
 function validerPrenom(e) {
   if (prenom.validity.valueMissing) {
@@ -27,6 +27,7 @@ function validerPrenom(e) {
     erreurPrenom.style.color = "red";
     erreurPrenom.style.fontSize = ".85rem";
     prenom.style.border = " 0.8px solid red";
+    return false;
   } else if (prenom.value.length < 2) {
     e.preventDefault();
     erreurPrenom.textContent =
@@ -34,14 +35,16 @@ function validerPrenom(e) {
     erreurPrenom.style.color = "red";
     erreurPrenom.style.fontSize = ".85rem";
     prenom.style.border = " 0.8px solid red";
+    return false;
   } else {
     erreurPrenom.textContent = " ";
     prenom.style.border = " 0.8px solid white";
+    return true;
   }
 }
 
 //validation du nom
-validation.addEventListener("click", validerNom);
+nom.addEventListener("keyup", validerNom);
 
 function validerNom(e) {
   if (nom.validity.valueMissing) {
@@ -50,20 +53,23 @@ function validerNom(e) {
     erreurNom.style.color = "red";
     erreurNom.style.fontSize = ".85rem";
     nom.style.border = " 0.8px solid red";
+    return false;
   } else if (nom.value.length < 2) {
     e.preventDefault();
     erreurNom.textContent = "* Le nom doit comporter au minimum 2 caractères.";
     erreurNom.style.color = "red";
     erreurNom.style.fontSize = ".85rem";
     nom.style.border = " 0.8px solid red";
+    return false;
   } else {
     erreurNom.textContent = " ";
     nom.style.border = " 0.8px solid white";
+    return true;
   }
 }
 
 //validation du mail
-validation.addEventListener("click", validerMail);
+mail.addEventListener("keyup", validerMail);
 
 let mailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/; //regular expression mail source https://www.w3resource.com/
 
@@ -74,6 +80,7 @@ function validerMail(e) {
     erreurMail.style.color = "red";
     erreurMail.style.fontSize = ".85rem";
     mail.style.border = " 0.8px solid red";
+    return false;
   } else if (!mail.value.match(mailRegex)) {
     e.preventDefault();
     erreurMail.textContent =
@@ -81,9 +88,11 @@ function validerMail(e) {
     erreurMail.style.color = "red";
     erreurMail.style.fontSize = ".85rem";
     mail.style.border = " 0.8px solid red";
+    return false;
   } else {
     erreurMail.textContent = " ";
     mail.style.border = " 0.8px solid white";
+    return true;
   }
 }
 
@@ -98,9 +107,11 @@ function validerBirthdate(e) {
     erreurBirthdate.style.color = "red";
     erreurBirthdate.style.fontSize = ".85rem";
     birthdate.style.border = " 0.8px solid red";
+    return false;
   } else {
     erreurBirthdate.textContent = " ";
     birthdate.style.border = " 0.8px solid white";
+    return true;
   }
 }
 
@@ -114,17 +125,19 @@ function validerQuantity(e) {
     erreurQuantity.style.color = "red";
     erreurQuantity.style.fontSize = ".85rem";
     quantity.style.border = " 0.8px solid red";
+    return false;
   } else {
     erreurQuantity.textContent = " ";
     quantity.style.border = " 0.8px solid white";
+    return true;
   }
 }
 
 //validation choix de ville d'inscription
 
-/*validation.addEventListener("click", validerRadio);
+/*validation.addEventListener("click", validerVille);
 
-function validerRadio(e) {
+function validerVille(e) {
   if (ville.IsRadioCheck) {
     erreurVille.textContent = " ";
     quantity.style.border = " 0.8px solid white";
@@ -145,6 +158,7 @@ function validerConditions(e) {
   if (conditions.checked) {
     erreurConditions.textContent = " ";
     quantity.style.border = " 0.8px solid white";
+    return true;
   } else {
     e.preventDefault();
     erreurConditions.textContent =
@@ -152,5 +166,64 @@ function validerConditions(e) {
     erreurConditions.style.color = "red";
     erreurConditions.style.fontSize = ".85rem";
     conditions.style.border = " 0.8px solid red";
+    return false;
   }
 }
+
+//VALIDATION DU FORMULAIRE
+
+let prenomValide = false;
+let nomValide = false;
+let mailValide = false;
+let birthdateValide = false;
+let quantityValide = false;
+let villeValide = false;
+let conditionsValide = false;
+const confirmation = document.querySelectorAll(".confirmation-bground");
+
+function validerFormulaire() {
+  validerPrenom();
+  if (validerPrenom()) {
+    prenomValide = true;
+  }
+  validerNom();
+  if (validerNom()) {
+    nomValide = true;
+  }
+  validerMail();
+  if (validerMail()) {
+    mailValide = true;
+  }
+  validerBirthdate();
+  if (validerBirthdate()) {
+    birthdateValide = true;
+  }
+  validerQuantity();
+  if (validerQuantity()) {
+    quantityValide = true;
+  }
+
+  validerConditions();
+  if (validerConditions()) {
+    conditionsValide = true;
+  }
+}
+
+function confirmer() {
+  if (
+    prenomValide &&
+    nomValide &&
+    mailValide &&
+    birthdateValide &&
+    quantityValide &&
+    conditionsValide
+  ) {
+    confirmation.style.display = "block";
+  }
+}
+/*
+validerVille();
+  if (validerVille()) {
+    villeValide = true;
+  }
+    villeValide &&*/

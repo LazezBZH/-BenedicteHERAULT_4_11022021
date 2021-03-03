@@ -159,7 +159,9 @@ main {
   font-size: 16px;
 }
 
-.bground {
+.bground,
+.confirmation-bground {
+  /*ajout pour message de confirmation*/
   display: none;
   position: fixed;
   z-index: 1;

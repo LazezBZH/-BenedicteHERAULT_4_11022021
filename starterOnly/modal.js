@@ -17,6 +17,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // launch modal form
 function launchModal() {
+  console.log("salut");
   modalbg.style.display = "block";
 }
 
