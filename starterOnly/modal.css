@@ -8,6 +8,7 @@
   margin: 0;
   padding: 0;
 }
+
 /* Landing Page */
 
 body {
@@ -103,6 +104,14 @@ img {
     display: block;
     margin-top: -15px;
   }
+  /*ajout pour responsive*/
+  .hero-content p {
+    width: 85%;
+  }
+  .hero-content h1 {
+    font-size: 2.2rem;
+    font-weight: bolder;
+  }
 }
 
 main {
@@ -159,8 +168,7 @@ main {
   font-size: 16px;
 }
 
-.bground,
-.confirmation-bground {
+.bground {
   /*ajout pour message de confirmation*/
   display: none;
   position: fixed;
@@ -172,7 +180,15 @@ main {
   overflow: auto;
   background-color: rgba(26, 39, 156, 0.4);
 }
+#message-confirmation {
+  /*ajout pour message de confirmation*/
+  display: none;
 
+  text-align: center;
+}
+#message-confirmation__texte {
+  margin: 5rem 6rem 10rem 6rem;
+}
 .content {
   margin: 5% auto;
   width: 100%;
@@ -453,7 +469,7 @@ input[data-error]::after {
 }
 .btn-signup {
   outline: none;
-  text-transform: capitalize;
+  /*text-transform: capitalize; enlevé pour éviter maj à "M'inscris" maj à Je rajoutée en html*/
   font-size: 1.3rem;
   padding: 15px 23px;
   margin: 0;
