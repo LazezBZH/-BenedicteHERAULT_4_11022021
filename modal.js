@@ -162,6 +162,11 @@ function validerQuantity(e) {
     erreurQuantity.textContent = "* Merci d'indiquer une valeur entre 0 et 99.";
     quantity.classList.replace("text-control", "erreur-input");
     return false;
+  } else if (quantity.value > 99) {
+    e.preventDefault();
+    erreurQuantity.textContent = "* Merci d'indiquer une valeur entre 0 et 99.";
+    quantity.classList.replace("text-control", "erreur-input");
+    return false;
   } else {
     erreurQuantity.textContent = " ";
     quantity.classList.replace("erreur-input", "text-control");
