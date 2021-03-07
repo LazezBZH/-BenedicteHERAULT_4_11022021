@@ -18,6 +18,7 @@ let erreurConditions = document.getElementById("erreur-conditions");
 
 //validation du prénom
 prenom.addEventListener("keyup", validerPrenom);
+validation.addEventListener("click", validerPrenom);
 
 function validerPrenom(e) {
   if (prenom.validity.valueMissing) {
@@ -45,6 +46,7 @@ function validerPrenom(e) {
 
 //validation du nom
 nom.addEventListener("keyup", validerNom);
+validation.addEventListener("click", validerNom);
 
 function validerNom(e) {
   if (nom.validity.valueMissing) {
@@ -70,6 +72,7 @@ function validerNom(e) {
 
 //validation du mail
 mail.addEventListener("keyup", validerMail);
+validation.addEventListener("click", validerMail);
 
 let mailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/; //regular expression mail source https://www.w3resource.com/
 
@@ -135,21 +138,21 @@ function validerQuantity(e) {
 
 //validation choix de ville d'inscription
 
-/*validation.addEventListener("click", validerVille);
+validation.addEventListener("click", validerVille);
 
-function validerVille(e) {
-  if (ville.IsRadioCheck) {
-    erreurVille.textContent = " ";
-    quantity.style.border = " 0.8px solid white";
-  } else {
-    erreurVille.textContent =
-      "* Dans quelle ville souhaitez-vous vous inscrire?";
-    erreurVille.style.color = "red";
-    erreurVille.style.fontSize = ".85rem";
-    quantity.style.border = " 0.8px solid red";
+function validerVille() {
+  for (i = 0; i < ville.length; i++) {
+    if (ville[i].checked) {
+      erreurVille.textContent = " ";
+      return true; // un bouton radio est sélectionné
+    }
   }
-}*/
-
+  // aucun bouton radio n'est sélectionné
+  erreurVille.textContent = "* Dans quelle ville souhaitez-vous vous inscrire?";
+  erreurVille.style.color = "red";
+  erreurVille.style.fontSize = ".85rem";
+  return false;
+}
 //validation CGV
 
 validation.addEventListener("click", validerConditions);
@@ -170,60 +173,35 @@ function validerConditions(e) {
   }
 }
 
-//VALIDATION DU FORMULAIRE
+const confirmation = document.getElementById("message-confirmation");
+const form = document.getElementById("form");
+validation.addEventListener("click", validerFormulaire);
+function afficherConfirmation() {
+  form.style.display = "none";
 
-let prenomValide = false;
-let nomValide = false;
-let mailValide = false;
-let birthdateValide = false;
-let quantityValide = false;
-let villeValide = false;
-let conditionsValide = false;
-const confirmation = document.querySelectorAll(".confirmation-bground");
-
-function validerFormulaire() {
-  validerPrenom();
-  if (validerPrenom()) {
-    prenomValide = true;
-  }
-  validerNom();
-  if (validerNom()) {
-    nomValide = true;
-  }
-  validerMail();
-  if (validerMail()) {
-    mailValide = true;
-  }
-  validerBirthdate();
-  if (validerBirthdate()) {
-    birthdateValide = true;
-  }
-  validerQuantity();
-  if (validerQuantity()) {
-    quantityValide = true;
-  }
-
-  validerConditions();
-  if (validerConditions()) {
-    conditionsValide = true;
-  }
+  confirmation.style.display = "block";
 }
+function validerFormulaire(e) {
+  e.preventDefault();
 
-function confirmer() {
-  if (
+  let prenomValide = validerPrenom();
+  let nomValide = validerNom();
+  let mailValide = validerMail();
+  let birthdateValide = validerBirthdate();
+  let quantityValide = validerQuantity();
+  let villeValide = validerVille();
+  let conditionsValide = validerConditions();
+
+  let formulaireValide =
     prenomValide &&
     nomValide &&
     mailValide &&
     birthdateValide &&
     quantityValide &&
-    conditionsValide
-  ) {
-    confirmation.style.display = "block";
+    villeValide &&
+    conditionsValide;
+
+  if (formulaireValide) {
+    afficherConfirmation();
   }
 }
-/*
-validerVille();
-  if (validerVille()) {
-    villeValide = true;
-  }
-    villeValide &&*/
