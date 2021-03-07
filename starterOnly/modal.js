@@ -85,8 +85,7 @@ function fermerMessageValidation() {
 function validerPrenom(e) {
   if (prenom.validity.valueMissing) {
     e.preventDefault();
-    erreurPrenom.textContent =
-      "* Le prénom doit comporter au minimum 2 caractères.";
+    erreurPrenom.textContent = "* Veuillez renseigner votre prénom.";
     prenom.classList.replace("text-control", "erreur-input");
     return false;
   } else if (prenom.value.length < 2) {
@@ -106,7 +105,7 @@ function validerPrenom(e) {
 function validerNom(e) {
   if (nom.validity.valueMissing) {
     e.preventDefault();
-    erreurNom.textContent = "* Le nom doit comporter au minimum 2 caractères.";
+    erreurNom.textContent = "* Veuillez renseigner votre nom.";
     nom.classList.replace("text-control", "erreur-input");
     return false;
   } else if (nom.value.length < 2) {
