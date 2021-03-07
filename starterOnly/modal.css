@@ -169,7 +169,6 @@ main {
 }
 
 .bground {
-  /*ajout pour message de confirmation*/
   display: none;
   position: fixed;
   z-index: 1;
@@ -228,8 +227,22 @@ input {
   font-size: 20px;
   height: 48px;
 }
-.form-data[data-error]::after {
-  /*changement de tous les formData en form-data pour avoir un même style de notation des classes*/
+.erreur {
+  color: red;
+  font-size: 0.85rem;
+} /*message d'erreur*/
+.erreur-input {
+  margin: 0;
+  padding: 8px;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 20px;
+  height: 48px;
+
+  border: 0.8px solid red;
+} /*entourage input suite à erreur*/
+/* .form-data[data-error]::after {
+  changement de tous les formData en form-data pour avoir un même style de notation des classes
   content: attr(data-error);
   font-size: 0.4em;
   color: #e54858;
@@ -247,7 +260,7 @@ input {
 .form-data[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
-/* 
+
 input[data-error]::after {
     content: attr(data-error);
     font-size: 0.4em;
