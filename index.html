@@ -16,12 +16,13 @@
       rel="stylesheet"
     />
   </head>
-  <div class="container">
-    <body>
+
+  <body>
+    <div class="container">
       <div class="topnav" id="my-topnav">
         <!--changement de myTopnav en my-topnav pour avoir un même style de notation des id-->
         <div class="header-logo">
-          <img alt="logo" src="Logo.png" width="auto" height="auto" />
+          <img alt="logo" src="Logo.png" />
         </div>
         <div class="main-navbar">
           <a href="#" class="active"><span>Accueil</span></a>
@@ -236,7 +237,8 @@
                     type="checkbox"
                     id="checkbox1"
                   /><!--checked enlevé afin que la case ne soit pas cochée d'office, loi sur consentement-->
-                  <label class="checkbox2-label" for="checkbox1" required>
+                  <label class="checkbox2-label" for="checkbox1"
+                    ><!--required enlevé après passage W3C-->
                     <span class="checkbox-icon"></span>
                     J'ai lu et accepté les conditions d'utilisation.
                   </label>
@@ -256,10 +258,9 @@
                   <br />
                 </div>
                 <input
-                  class="btn-submit"
+                  class="button btn-submit"
                   id="btn-envoi"
                   type="submit"
-                  class="button"
                   value="C'est parti"
                 />
               </form>
@@ -270,7 +271,7 @@
       <footer>
         <p class="copyrights">Copyright 2014 - 2020, GameOn Inc.</p>
       </footer>
-      <script src="modal.js"></script>
-    </body>
-  </div>
+    </div>
+    <script src="modal.js"></script>
+  </body>
 </html>
