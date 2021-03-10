@@ -12,7 +12,7 @@ const modalBg = document.querySelector(".bground"); //Maj à modalBg
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".form-data"); //changement de tous les formData (classe html) en form-data pour avoir un même style de notation des classes
 const successBtn = document.getElementById("success-btn");
-const validation = document.getElementById("btn-envoi");
+const validationBtn = document.getElementById("btn-envoi");
 const confirmation = document.getElementById("message-confirmation");
 const fermetureClicX = document.getElementsByClassName("close");
 
@@ -42,23 +42,20 @@ fermetureClicX[0].addEventListener("click", fermerFormulaire); //élément cibl�
 successBtn.addEventListener("click", fermerMessageValidation); //fermer message de validation
 
 prenom.addEventListener("keyup", validerPrenom);
-validation.addEventListener("click", validerPrenom);
 
 nom.addEventListener("keyup", validerNom);
-validation.addEventListener("click", validerNom);
 
 mail.addEventListener("keyup", validerMail);
-validation.addEventListener("click", validerMail);
 
-validation.addEventListener("click", validerBirthdate);
+validationBtn.addEventListener("click", validerBirthdate);
 
-validation.addEventListener("click", validerQuantity);
+validationBtn.addEventListener("click", validerQuantity);
 
-validation.addEventListener("click", validerVille);
+validationBtn.addEventListener("click", validerVille);
 
-validation.addEventListener("click", validerConditions);
+validationBtn.addEventListener("click", validerConditions);
 
-validation.addEventListener("click", validerFormulaire);
+validationBtn.addEventListener("click", validerFormulaire);
 
 // OUVERTURE ET FERMETURES fonctions
 
@@ -174,6 +171,7 @@ function validerQuantity(e) {
 }
 
 //validation choix de ville d'inscription
+
 function validerVille() {
   for (i = 0; i < ville.length; i++) {
     if (ville[i].checked) {
@@ -200,7 +198,8 @@ function validerConditions(e) {
 }
 
 //CONFIRMATION
-//vérifications
+
+//vérifications finales
 function validerFormulaire(e) {
   e.preventDefault();
 
@@ -230,4 +229,40 @@ function afficherConfirmation() {
   form.style.display = "none";
 
   confirmation.style.display = "block";
+}
+
+//demander ville quand le reste est rempli
+quantity.addEventListener("change", afficherErreurVille);
+
+function afficherErreurVille() {
+  if (quantity.validity.valid) {
+    validerVille();
+  }
+}
+
+for (let i = 0; i < ville.length; i++) {
+  ville[i].addEventListener("change", function () {
+    if (ville[i].checked) {
+      erreurVille.textContent = " ";
+    }
+  });
+}
+
+//demander acceptation cgv qd ville sélectionnée
+for (let i = 0; i < ville.length; i++) {
+  ville[i].addEventListener("change", function () {
+    if (ville[i].checked) {
+      erreurConditions.textContent =
+        "* Vous devez lire et accepter les conditions d'utilisation.";
+    }
+  });
+}
+
+//rendre bouton "c'est parti" fonctionnel
+conditions.addEventListener("change", activerBoutonSubmit);
+function activerBoutonSubmit() {
+  if (conditions.checked) {
+    validationBtn.removeAttribute("disabled");
+    erreurConditions.textContent = " ";
+  }
 }
